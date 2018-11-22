@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="001-Grassland01" tilewidth="32" tileheight="32">
+  <image source="001-Grassland01.png" width="256" height="576"/>
+  <tile id="138">
+   <properties>
+    <property name="isPortal" value="true"/>
+    <property name="transTo" value="helloworld"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAMw6DOv+kLOSSsmqqqqu8ezqADhQ==
+  </data>
+ </layer>
+ <layer name="block" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzzkKgFAMRdHfuFinwqlwKpwKRffsLawE4UtALN6FA6kS4px6U4gIMRKkH93NkKNAicq4L3iY79Vo0KJDb7zr24ARE2Ysxn2+/67YrnnHYbyrlFJKKaXUnzsBUOcLjQ==
+  </data>
+ </layer>
+ <layer name="portal" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6D1t7T/AugDCUiANt8BAAA4sAMSAIw=
+  </data>
+ </layer>
+</map>

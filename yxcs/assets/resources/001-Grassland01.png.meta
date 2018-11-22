@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "05f0bf17-cf99-4d7b-b4a9-95fc0a542fbf",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "001-Grassland01": {
+      "ver": "1.0.3",
+      "uuid": "715e0cf3-cb45-4f19-a91c-1aece9856519",
+      "rawTextureUuid": "05f0bf17-cf99-4d7b-b4a9-95fc0a542fbf",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 256,
+      "height": 576,
+      "rawWidth": 256,
+      "rawHeight": 576,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
