@@ -31,10 +31,15 @@ export default class Chess extends cc.Component {
     public initPos;
 
     @property( [cc.Integer])
-    private chessType=99;
+    public chessType=99;
 
     @property(Boolean)
-    private alreadyCross=false;
+    private crossing=false;
+
+    @property(cc.Prefab)
+    public  myExplode;
+
+
 
     private _getRandomNum(min,max){
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -44,8 +49,8 @@ export default class Chess extends cc.Component {
     {
         var self=this;
         
-        cc.director.getCollisionManager().enabled = true;
-        cc.director.getCollisionManager().enabledDebugDraw = true;
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
         var myType = this._getRandomNum(0, this.maxTypeCount);
 
         switch(myType)
@@ -103,18 +108,18 @@ export default class Chess extends cc.Component {
          this.node.on(cc.Node.EventType.TOUCH_END,function(event){
 
             if (BattleGlobalTs.newPos != null) {
-                this.node.setPosition(BattleGlobalTs.newPos);
+                self.node.setPosition(BattleGlobalTs.newPos);
                 BattleGlobalTs.newPos = null;
                 BattleGlobalTs.oldPos = null;
             } else
             {
-                this.node.setPosition(this.initPos);
+                self.node.setPosition(self.getComponent("ChessTs").initPos);
             }
-            if (BattleGlobalTs.crossFlag)
+            if (BattleGlobalTs.isAlreadyCollision)
             {
                 BattleGlobalTs.currentStep = BattleGlobalTs.myStep.GETRESULT_STEP;
-                BattleGlobalTs.crossFlag = false;
-                cc.find("Canvas").getComponent("battleManager").doGetResultAndMovingDownStep();
+                BattleGlobalTs.isAlreadyCollision = false;
+               cc.find("Canvas").getComponent("BattleManagerTs").doGetResultAndMovingDownStep();
             }
 
          },this);
@@ -122,40 +127,58 @@ export default class Chess extends cc.Component {
 
 
     }
-    onEnable()
+ 
+ 
+    onCollisionEnter (other,self)
     {
-        cc.director.getCollisionManager().enabled = true;
-
-    }
-   /* onDisabled () {
-        cc.director.getCollisionManager().enabled = false;
-        cc.director.getCollisionManager().enabledDebugDraw = false;
-    }*/
-    onCollisionEnter(other,self)
-    {
-        cc.log("32113123");
-      /*  if(this.node.name!=BattleGlobalTs.snapName)
+       
+        if(this.node.name!=BattleGlobalTs.snapName)
         {
 
             return;
         }
-        if (!this.alreadyCross){
-            BattleGlobalTs.oldPos = self.getComponent("chess").initPos;
-            BattleGlobalTs.newPos = other.getComponent("chess").initPos;
-            self.getComponent("chess").initPos = BattleGlobalTs.newPos;
-            // self.setPosition(newPos);
+        if (!this.crossing){
+        
+            BattleGlobalTs.oldPos = self.getComponent("ChessTs").initPos;
+            BattleGlobalTs.newPos = other.getComponent("ChessTs").initPos;
+
+            this.node.getComponent("ChessTs").initPos = BattleGlobalTs.newPos;        
+            
             other.node.setPosition(BattleGlobalTs.oldPos);
-            other.getComponent("chess").initPos = BattleGlobalTs.oldPos;
-            this.alreadyCross = true;
-            BattleGlobalTs.crossFlag = true;
-        }*/
+            other.getComponent("ChessTs").initPos = BattleGlobalTs.oldPos;
+    
+            this.crossing = true;
+            BattleGlobalTs.isAlreadyCollision = true;
+        }
     }
 
     onCollisionExit(other,self)
     {
-        cc.log("collision  exit");
-      /*  this.alreadyCross=false;*/
+
+        this.crossing=false;
     }
-   
+  public  destroySelf () {
+        var self=this;
+        var actionArray = new Array();
+        var destroyEffectCallFunc = cc.callFunc( ()=> {
+            var board = cc.find("Canvas/chessBoard");
+            var particleNode = cc.instantiate(self.myExplode);
+            particleNode.name="particle_texture";
+            particleNode.setPosition(this.node.getPosition());
+            board.addChild(particleNode);
+
+        }, this);
+      //  var destroyDelay = cc.delayTime(BattleGlobalTs.DESTROY_DELAY_TIME);
+        var destroyCallFunc = cc.callFunc( ()=>{
+
+            self.node.destroy();
+        },this);
+        
+        actionArray.push(destroyEffectCallFunc);
+        actionArray.push(destroyCallFunc);
+        //actionArray.push(destroyDelay);
+        this.node.runAction(cc.sequence(actionArray));
+       
+    }
 
 }

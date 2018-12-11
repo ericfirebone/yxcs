@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1.9973288782425767,
-      "y": 1.9973288782425767,
+      "x": 0.56875,
+      "y": 0.56875,
       "z": 1
     },
     "_quat": {
@@ -369,8 +369,11 @@
     "chess": {
       "__uuid__": "14a91918-2d0b-4a7b-a29d-98e85f03f564"
     },
-    "positionList": [],
     "chessOffset": 10,
+    "destroyQualityCount": 3,
+    "myExplode": {
+      "__uuid__": "02e9efd0-52ff-4b45-b764-c3f8bd6a634a"
+    },
     "_id": "aeIm2scYhBjqjvzQMGLA28"
   }
 ]

@@ -17,7 +17,7 @@
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 2,
+    "_level": 1,
     "_components": [
       {
         "__id__": 2
@@ -74,7 +74,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "_zIndex": 0,
-    "groupIndex": 0,
+    "groupIndex": 3,
     "_id": ""
   },
   {
@@ -147,7 +147,10 @@
       }
     ],
     "chessType": 99,
-    "alreadyCross": false,
+    "crossing": false,
+    "myExplode": {
+      "__uuid__": "02e9efd0-52ff-4b45-b764-c3f8bd6a634a"
+    },
     "_id": ""
   },
   {
@@ -166,8 +169,8 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 75,
-      "height": 75
+      "width": 50,
+      "height": 50
     },
     "_id": ""
   },
